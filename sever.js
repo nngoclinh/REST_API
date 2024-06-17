@@ -6,9 +6,9 @@ const studentRoutes = require('./src/student/routes');
 app.use(express.json());
 
 app.get("/",(req,res)=>{ 
-    res.send("Hello world!");
+    res.send("Hello world!"); 
 });
 
-app.use('/api/v1/students',studentRoutes);
+app.use('/api/v1/students',studentRoutes); 
 
-app.listen(port,()=> console.log(`app listen on port ${port}`));
+app.listen(port,()=> console.log(`app listen on port ${port}`)); 
