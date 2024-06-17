@@ -48,10 +48,28 @@ const removeStudents =(req,res) => {
     }
     });
 };
+const updateStudents=(req,res)=>{
+    const id =parseInt(req.params.id);
+    const {name} = req.body;
+
+    pool.query(queries.getStudentsById, [id], (error,results)=>{
+        const noStudentFound =!results.rows.length;
+        if(noStudentFound){
+            res.send("No students found !! Couldn't update");
+        }
+        else{
+        pool.query(queries.updateStudents,[name,id],(error,results)=>{
+            if(error) throw error;
+            res.status(200).send("Students updated");
+        });
+        }
+    });
+};
 
 module.exports ={
     getStudents,
     getStudentsById, 
     addStudents,
     removeStudents,
+    updateStudents,
 };
