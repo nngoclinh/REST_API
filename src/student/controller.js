@@ -104,8 +104,6 @@ const updateStudents = (req, res) => {
         });
     });
 };
-
-
 module.exports ={
     getStudents,
     getStudentsById, 
