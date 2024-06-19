@@ -18,15 +18,17 @@ const getStudentsById = (req,res) => {
 //add to database
 const addStudents = (req,res) => {
     const { name , email, age, dob} = req.body;
+    const dobParts = dob.split('/'); // Assuming dob is in dd/mm/yyyy format
+    const formattedDob = `${dobParts[2]}-${dobParts[1]}-${dobParts[0]}`;
     //check email exists
     pool.query(queries.checkEmailExists,[email],(error,results)=>{
         if(results.rows.length) {
-            res.send("Email already existed");
+            return res.status(400).json({ error: 'Email already exists' });
         }
     //add students
-    pool.query(queries.addStudents,[name , email, age, dob], (error,results) =>{
+    pool.query(queries.addStudents,[name , email, age, formattedDob], (error,results) =>{
         if(error) throw error;
-        res.status(201).send("Students added");
+        res.status(201).json({ message: 'Student added successfully' });
         console.log("Students created"); 
     }) 
     });
