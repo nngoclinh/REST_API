@@ -1,16 +1,16 @@
-const express = require('express')
+const express = require("express");
 const app = express();
 const port = 3000;
-const studentRoutes = require('./src/student/routes');
-const cors = require('cors');
+const studentRoutes = require("./src/student/routes");
+const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
 
-app.get("/",(req,res)=>{ 
-    res.send("Hello world!"); 
+app.get("/", (req, res) => {
+  res.send("Hello world!");
 });
 
-app.use('/api/v1/students',studentRoutes); 
+app.use("/api/v1/students", studentRoutes);
 
-app.listen(port,()=> console.log(`app listen on port ${port}`)); 
+app.listen(port, () => console.log(`app listen on port ${port}`));
